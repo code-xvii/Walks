@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Walks.Api.Data;
+using Walks.Api.Profiles;
 using Walks.Api.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +17,7 @@ builder.Services.AddDbContext<WalksDbContext>(options =>
 
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 
-
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddControllers();
 
