@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Walks.Api.Data;
 using Walks.Api.Models.DTOs;
 using Walks.Api.Repositories;
@@ -9,10 +10,12 @@ namespace Walks.Api.Controllers
     [Route("api/[controller]")]
     public class RegionsController : ControllerBase
     {
+        private readonly IMapper mapper;
         private readonly IRegionRepository repo;
 
-        public RegionsController(IRegionRepository repo)
+        public RegionsController(IMapper mapper, IRegionRepository repo)
         {
+            this.mapper = mapper;
             this.repo = repo;
         }
 
@@ -20,27 +23,8 @@ namespace Walks.Api.Controllers
         public IActionResult GetRegions()
         {
             var regions = repo.GetAll();
-
-
-            // region DTO
-            var regionsDto = new List<RegionDto>();
-
-            regions.ToList().ForEach(r =>
-               {
-                   var regionDto = new RegionDto
-                   {
-                       Id = r.Id,
-                       Code = r.Code,
-                       Name = r.Name,
-                       Lat = r.Lat,
-                       Long = r.Long,
-                       Population = r.Population
-                   };
-
-                   regionsDto.Add(regionDto);
-               });
-
-            return Ok(regionsDto);
+            var model = mapper.Map <IReadOnlyList<RegionDto>>(regions);
+            return Ok(model);
         }
     }
 }
