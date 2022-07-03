@@ -20,9 +20,9 @@ namespace Walks.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetRegions()
+        public async Task<IActionResult> GetRegions()
         {
-            var regions = repo.GetAll();
+            var regions = await repo.GetAllAsync();
             var model = mapper.Map <IReadOnlyList<RegionDto>>(regions);
             return Ok(model);
         }

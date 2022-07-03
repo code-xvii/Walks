@@ -1,11 +1,12 @@
-﻿using Walks.Api.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Walks.Api.Data;
 using Walks.Api.Models.Domains;
 
 namespace Walks.Api.Repositories
 {
     public interface IRegionRepository
     {
-        IReadOnlyList<Region> GetAll();
+       Task<IReadOnlyList<Region>> GetAllAsync();
        // Region Get(int id);
     }
 
@@ -17,9 +18,9 @@ namespace Walks.Api.Repositories
         {
             this.db = db;
         }
-        public IReadOnlyList<Region> GetAll()
+        public async Task<IReadOnlyList<Region>> GetAllAsync()
         {
-            return db.Regions.ToList();
+            return await db.Regions.ToListAsync();
         }
     }
 }
