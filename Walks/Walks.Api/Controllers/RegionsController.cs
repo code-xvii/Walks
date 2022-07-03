@@ -54,9 +54,9 @@ namespace Walks.Api.Controllers
             var region = mapper.Map<Region>(regionDto);
 
             var newRegion = await repo.AddAsync(region);
-            var respnseData = mapper.Map<RegionDto>(newRegion);
+            var responseData = mapper.Map<RegionDto>(newRegion);
 
-            return CreatedAtAction(nameof(GetRegionAsync), new { id = respnseData.Id }, respnseData);
+            return CreatedAtAction(nameof(GetRegionAsync), new { id = responseData.Id }, responseData);
  
         }
 
