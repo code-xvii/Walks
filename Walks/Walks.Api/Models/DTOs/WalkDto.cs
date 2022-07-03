@@ -13,6 +13,18 @@
 
     public class WalkDifficultyDto
     {
+        public Guid Id { get; set; }
+        public string Code { get; set; }
+    }
+
+    public class AddWalkDifficultyRequestDto
+    {
+        public string Code { get; set; }
+    }
+
+    public class UpdateWalkDifficultyRequestDto
+    {
+        public Guid Id { get; set; }
         public string Code { get; set; }
     }
 }

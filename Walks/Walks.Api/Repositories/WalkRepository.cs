@@ -21,7 +21,7 @@ namespace Walks.Api.Repositories
             return walk;
         }
 
-        public async Task<Walk> DeleteAsync(Guid id)
+        public async Task<Walk?> DeleteAsync(Guid id)
         {
             var walk = await  db.Walks.FindAsync(id);
             if (walk == null)
